@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "protoFile";
+option java_outer_classname = "makeFile";
+package file;
+
+service MakeFile{
+  rpc sendFileMessage (FileInfoRequest) returns (FileResultResponse);
+}
+
+/** 请求消息 */
+message FileInfoRequest{
+
+    // 待处理的文件路径
+    string filePath = 1;
+
+    // 待处理的消息
+    string message = 2;
+
+    // 对文件的处理方式
+    enum Operation {
+      MAKE_DTO = 0;
+    }
+    Operation operation = 3;
+
+}
+
+/** 响应结果 */
+message FileResultResponse{
+
+  // 响应值
+  int32 code = 1;
+
+  // 响应消息
+  string message = 2;
+
+  // 已处理完成的消息路径
+  string filePathResult = 3;
+
+  // 源文件路径
+  string filePathOld = 4;
+
+
+}
